@@ -40,11 +40,13 @@ else
         if j3-j2+t+m1 >= 0 && j3-j1+t-m2 >=0 && j1+j2-j3-t >= 0 && j1-t-m1 >=0 && j2-t+m2 >= 0
             x_t = factorial(t)*factorial(j1+j2-j3-t)*factorial(j3-j2+t+m1)* ...
                 factorial(j3-j1+t-m2)*factorial(j1-t-m1)*factorial(j2-t+m2);
-            Sum_t = Sum_t + (-1)^t/x_t;
+            %Sum_t = Sum_t + (-1)^t/x_t;
+            Sum_t = Sum_t + sym((-1)^t)/sym(x_t);  % for octave
         end
     end
     
-    w = coeff1*sqrt(coeff2*tri_coeff)*Sum_t;
+    %w = coeff1*sqrt(coeff2*tri_coeff)*Sum_t;
+    w = coeff1*sqrt(coeff2*tri_coeff)*double(Sum_t);  % for octave
 end
 
 end

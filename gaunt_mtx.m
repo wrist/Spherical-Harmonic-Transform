@@ -19,14 +19,13 @@ function A = gaunt_mtx(N1, N2, N)
 
 A = zeros((N1+1)^2, (N2+1)^2, (N+1)^2);
 for n = 0:N
-        for m = -n:n
-            q = n*(n+1)+m;
-                        
-            for n1 = 0:N1
+    for n1 = 0:N1
+        for n2 = 0:N2
+            wigner3j0 = w3j(n1, n2, n, 0, 0, 0);
+            for m = -n:n
+                q = n*(n+1)+m;
                 for m1 = -n1:n1
                     q1 = n1*(n1+1)+m1;
-                    
-                    for n2 = 0:N2
                         for m2 = -n2:n2
                             q2 = n2*(n2+1)+m2;
                             
@@ -34,7 +33,6 @@ for n = 0:N
                                 A(q1+1, q2+1, q+1) = 0;
                             else
                                 wigner3jm = w3j(n1, n2, n, m1, m2, -m);
-                                wigner3j0 = w3j(n1, n2, n, 0, 0, 0);
                                 A(q1+1, q2+1, q+1) = (-1)^m * sqrt((2*n1+1)*(2*n2+1)*(2*n+1)/(4*pi)) * wigner3jm * wigner3j0;
                             end
                         end
